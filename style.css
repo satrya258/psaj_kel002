@@ -1,0 +1,294 @@
+/* FILE: style.css 
+   TEMA: Modern-Historical Indonesia
+   DESKRIPSI: Kode CSS lengkap dengan sistem Grid, Flexbox, dan Animasi.
+*/
+
+/* --- 1. ANIMASI (Keyframes) --- */
+/* Efek muncul dari bawah ke atas */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efek transisi halus (Fade In) */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- 2. GLOBAL STYLES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Padding tidak akan merusak ukuran elemen */
+}
+
+html {
+    scroll-behavior: smooth; /* Animasi bergeser halus saat klik menu navigasi */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fdfaf5; /* Warna krem seperti kertas lama */
+    overflow-x: hidden; /* Mencegah scroll ke samping yang tidak sengaja */
+}
+
+/* --- 3. NAVIGASI (Header) --- */
+header {
+    background-color: #8b2a24; /* Merah bata tua (Erat dengan sejarah) */
+    padding: 1rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.logo span {
+    color: #d4a017; /* Aksen Emas Sejarah */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    color: #f4f4f4;
+    text-decoration: none;
+    font-size: 0.9rem;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* Animasi garis bawah pada link navigasi */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #d4a017;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: #d4a017;
+}
+
+/* --- 4. HERO SECTION --- */
+.hero-kelompok {
+    height: 100vh;
+    /* Ganti URL gambar di bawah dengan foto bertema sejarah jika ada */
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
+                url('https://images.unsplash.com/photo-1596438415017-0639d486937e?q=80&w=2000') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-overlay p {
+    font-size: 1.1rem;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.hero-overlay h1 {
+    font-size: 4rem;
+    margin: 10px 0;
+    letter-spacing: 3px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.btn-cek {
+    display: inline-block;
+    padding: 12px 35px;
+    background-color: #d4a017;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: 0.3s;
+    border: 2px solid transparent;
+}
+
+.btn-cek:hover {
+    background-color: transparent;
+    border-color: #d4a017;
+    color: #d4a017;
+    transform: scale(1.05);
+}
+
+/* --- 5. LAYOUT UMUM --- */
+.section-container {
+    padding: 100px 10%;
+}
+
+.bg-light { background-color: #f4f1ea; }
+.bg-white { background-color: #ffffff; }
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 2.5rem;
+    color: #8b2a24;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.section-title::after {
+    content: '';
+    width: 80px;
+    height: 4px;
+    background: #d4a017;
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* --- 6. KARTU ANGGOTA (Grid System) --- */
+.kelompok-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Membuat kartu sejajar otomatis */
+    gap: 30px;
+}
+
+.kelompok-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-bottom: 5px solid #8b2a24;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Efek kemunculan bertahap (Staggered Delay) */
+.kelompok-card:nth-child(1) { animation-delay: 0.1s; }
+.kelompok-card:nth-child(2) { animation-delay: 0.2s; }
+.kelompok-card:nth-child(3) { animation-delay: 0.3s; }
+.kelompok-card:nth-child(4) { animation-delay: 0.4s; }
+.kelompok-card:nth-child(5) { animation-delay: 0.5s; }
+.kelompok-card:nth-child(6) { animation-delay: 0.6s; }
+
+.kelompok-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(139, 42, 36, 0.2);
+    border-bottom-color: #d4a017;
+}
+
+.card-img {
+    overflow: hidden;
+    height: 250px;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.kelompok-card:hover .card-img img {
+    transform: scale(1.1); /* Zoom gambar saat kartu di-hover */
+}
+
+.card-info {
+    padding: 25px;
+    text-align: center;
+}
+
+.card-info h3 {
+    margin-bottom: 8px;
+    color: #222;
+}
+
+/* --- 7. MAKALAH & VIDEO --- */
+.content-wrapper, .video-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.pdf-container, .video-container {
+    width: 100%;
+    max-width: 850px;
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 8px solid #fff;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.content-desc p, .video-desc p {
+    font-style: italic;
+    color: #666;
+}
+
+/* --- 8. FOOTER --- */
+footer {
+    background-color: #1a1a1a;
+    color: #f4f4f4;
+    text-align: center;
+    padding: 50px 0;
+}
+
+footer p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* --- 9. RESPONSIVE (Layar Kecil/HP) --- */
+@media (max-width: 768px) {
+    .hero-overlay h1 {
+        font-size: 2.5rem;
+    }
+    
+    .section-container {
+        padding: 60px 5%;
+    }
+
+    .nav-links {
+        display: none; /* Kamu bisa menambah JS nanti untuk menu toggle mobile */
+    }
+
+    .pdf-container, .video-container {
+        height: 350px;
+    }
+}
